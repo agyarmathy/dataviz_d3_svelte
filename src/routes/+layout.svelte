@@ -1,13 +1,12 @@
 <script>
-import header from '../components/header.svelte';
+import Header from '../components/header.svelte';
 
 
 </script>
 
 
-<header>
-    <h1>Header</h1>
-</header>
+
+<Header></Header>
 
 <main>
     <slot></slot>
