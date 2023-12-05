@@ -58,14 +58,14 @@
         let g = select(svg).append("g");
 
         let zoom = d3zoom()
-            .scaleExtent([1, 10]) // Limit the zoom scale between 1x and 10x
+            .scaleExtent([1, 10]) 
             .on("zoom", zoomed);
 
-        // Call the zoom behavior on the SVG
+        
         select(svg).call(zoom);
 
         function zoomed(event) {
-            g.attr("transform", event.transform); // Apply the zoom effect
+            g.attr("transform", event.transform); 
         }
 
 
@@ -102,7 +102,7 @@
                     (point) => point[0] === d[0] && point[1] === d[1],
                 );
                 let opacity = (neighborsCount[index] * deltaNeighbors) / 644;
-                this._clicked = false; // Add a property to track whether the circle has been clicked
+                this._clicked = false; 
                 let tooltip = document.getElementById("tooltip");
 
                 select(this)
@@ -110,7 +110,7 @@
                     .style("filter", "url(#glow)")
                     .on("mouseover", function () {
                         if (this._clicked) {
-                            // If the point has been clicked, don't show the tooltip
+                            
                             return;
                         }
 
@@ -121,26 +121,26 @@
                     })
                     .on("mouseout", function () {
                         if (!this._clicked) {
-                            // Only update the opacity if the circle has not been clicked
+                            
                             select(this).style("fill-opacity", opacity);
                         }
                         tooltip.style.visibility = "hidden";
                     })
                     .on("click", function () {
-                        this._clicked = !this._clicked; // Toggle the clicked property
+                        this._clicked = !this._clicked; 
                         if (this._clicked) {
                             select(this).style("fill-opacity", 0.5);
                             let legend = document.getElementById("legend");
                             let p = document.createElement("p");
                             p.textContent = `(${d[0]}, ${d[1]})`;
-                            p.id = `point-${i}`; // Add an id to the <p> element for later reference
+                            p.id = `point-${i}`; 
                             legend.appendChild(p);
-                            tooltip.style.visibility = "hidden"; // Hide the tooltip
+                            tooltip.style.visibility = "hidden"; 
                         } else {
                             select(this).style("fill-opacity", opacity);
-                            let p = document.getElementById(`point-${i}`); // Get the <p> element by its id
+                            let p = document.getElementById(`point-${i}`); 
                             if (p) {
-                                p.remove(); // Remove the <p> element from the legend
+                                p.remove(); 
                             }
                         }
                     });

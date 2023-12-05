@@ -9,19 +9,19 @@
         { name: "C", value: 30 },
         { name: "D", value: 40 },
         { name: "E", value: 11 },
-        // ...more data...
+        
     ];
 
     let svg;
     let width = 600;
     let height = 400;
-    let radius = Math.min(width, height) / 2.5; // Adjust this value
+    let radius = Math.min(width, height) / 2.5; 
 
     let color = scaleOrdinal(schemeCategory10);
 
     let pieGenerator = pie().value((d) => d.value);
     let arcGenerator = arc().innerRadius(0).outerRadius(radius);
-    let selectedSection; // Add this line
+    let selectedSection; 
 
     onMount(() => {
         let g = select(svg)
@@ -37,7 +37,7 @@ let arcs = g.selectAll("path")
     .data(pieGenerator(data))
     .join("path")
 
-        // Add this block
+        
         let filter = g.append("defs").append("filter").attr("id", "grayscale");
         filter
             .append("feColorMatrix")
@@ -54,9 +54,9 @@ let arcs = g.selectAll("path")
             .attr("fill", (d) => color(d.data.name))
             .each(function (d) {
                 this._current = d;
-            }) // Store the initial angles
+            })
             .on("mouseover", function (event, d) {
-                // Change this block
+              
                 if (selectedSection) {
                     select(selectedSection)
                         .transition()
@@ -82,7 +82,7 @@ let arcs = g.selectAll("path")
                     .style("filter", "url(#grayscale)");
             })
             .on("mouseout", function (event, d) {
-                // Add this block
+                
                 if (selectedSection) {
                     select(selectedSection)
                         .transition()
@@ -94,13 +94,13 @@ let arcs = g.selectAll("path")
             
             let legend = select(svg)
             .append("g")
-            .attr("transform", `translate(0, ${height + 20})`) // Move the entire legend group down
+            .attr("transform", `translate(0, ${height + 20})`) 
             .selectAll(".legend")
             .data(data)
             .enter()
             .append("g")
             .attr("class", "legend")
-            .attr("transform", (d, i) => `translate(0, ${i * 20})`); // Position each legend item
+            .attr("transform", (d, i) => `translate(0, ${i * 20})`); 
 
         legend.append("rect")
             .attr("x", width - 18)

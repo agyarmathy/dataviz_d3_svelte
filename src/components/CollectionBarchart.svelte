@@ -14,17 +14,17 @@
         { name: "B", value: 20 },
         { name: "C", value: 30 },
         { name: "D", value: 40 },
-        // ...more data...
+        
     ];
 
-    let colorScale; // Add this line
+    let colorScale; 
 
     let svg;
     let width = 600;
     let height = 400;
     let margin = { top: 20, right: 20, bottom: 30, left: 40 };
-    let sortByValueOrder = true; // Add this line
-    let isSortByValueClicked = false; // Add this line
+    let sortByValueOrder = true; 
+    let isSortByValueClicked = false; 
 
     let xScale, yScale, xAxis, yAxis;
 
@@ -52,9 +52,9 @@
 
         let g = select(svg).append("g");
 
-        colorScale = scaleLinear() // Add these lines
+        colorScale = scaleLinear() 
     .domain([0, max(data, d => d.value)])
-    .range(['#0077be', '#000080']); // Hexadecimal values for 'Ocean Blue' and 'Navy Blue'
+    .range(['#0077be', '#000080']); 
 
         g.selectAll("rect")
             .data(data)
@@ -63,12 +63,12 @@
             .attr("y", (d) => yScale(d.value))
             .attr("height", (d) => yScale(0) - yScale(d.value))
             .attr("width", xScale.bandwidth())
-            .attr("fill", (d) => colorScale(d.value)); // Update this line
+            .attr("fill", (d) => colorScale(d.value)); 
 
         g = select(svg).append("g");
 
         g.append("g")
-            .attr("class", "x-axis") // Assign a class to the x-axis
+            .attr("class", "x-axis") 
             .call(xAxis);
 
         g.append("g").call(yAxis);
@@ -81,12 +81,12 @@
         } else {
             data.sort((a, b) => b.value - a.value);
         }
-        sortByValueOrder = !sortByValueOrder; // Toggle the order
+        sortByValueOrder = !sortByValueOrder; 
         updateChart();
     }
 
-    let sortByNameOrder = true; // Add this line
-    let isSortByNameClicked = false; // Add this line
+    let sortByNameOrder = true; 
+    let isSortByNameClicked = false; 
 
     function sortByName() {
         isSortByNameClicked = true;
@@ -95,14 +95,14 @@
         } else {
             data.sort((a, b) => b.name.localeCompare(a.name));
         }
-        sortByNameOrder = !sortByNameOrder; // Toggle the order
+        sortByNameOrder = !sortByNameOrder; 
         updateChart();
     }
 
     function updateChart() {
         xScale.domain(data.map((d) => d.name));
 
-        colorScale.domain([0, max(data, d => d.value)]); // Add this line
+        colorScale.domain([0, max(data, d => d.value)]); 
 
 
         select(svg).selectAll('rect')
@@ -113,10 +113,10 @@
       .attr('x', d => xScale(d.name))
       .attr('y', d => yScale(d.value))
       .attr('height', d => yScale(0) - yScale(d.value))
-      .attr('fill', d => colorScale(d.value)); // Update this line
+      .attr('fill', d => colorScale(d.value)); 
 
 
-        // Update the x-axis with the new scale
+        
         xAxis = (g) =>
             g
                 .attr("transform", `translate(0,${height - margin.bottom})`)
@@ -128,10 +128,10 @@
 
 <button on:click={sortByValue}>
     Sort by Value {isSortByValueClicked ? (sortByValueOrder ? "↑" : "↓") : ""}
-    <!-- Update the button text -->
+    
 </button>
 <button on:click={sortByName}>
     Sort by Name {isSortByNameClicked ? (sortByNameOrder ? "↑" : "↓") : ""}
-    <!-- Update the button text -->
+    
 </button>
 <svg bind:this={svg} {width} {height}></svg>
