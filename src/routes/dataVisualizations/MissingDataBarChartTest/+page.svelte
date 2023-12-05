@@ -1,6 +1,6 @@
 <script>
     import BarChart from '../../../components/barChart.svelte';
-    import CollectionBarchart from '../../../components/CollectionBarchart.svelte';
+    import CollectionPiechart from '../../../components/CollectionPieChart.svelte';
 let actualdata = [30, 86, 168, 281, 303, 365];
 $: value1 = 30;
 let value2 = 86;
@@ -26,5 +26,5 @@ MissingDataBarChartTest 1
 
 <div>
 
-    <CollectionBarchart/>
+    <CollectionPiechart/>
 </div>
